@@ -4,16 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "professores")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString(onlyExplicitlyIncluded = true)
-public class Professor {
+public class Professor extends Auditable{
 
     @Id
     @ToString.Include
@@ -43,9 +42,4 @@ public class Professor {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 }
