@@ -2,6 +2,7 @@ package br.com.luankenzley.hyperprof.api.professores.services;
 
 import br.com.luankenzley.hyperprof.api.professores.dtos.ProfessorResponse;
 import br.com.luankenzley.hyperprof.api.professores.mappers.ProfessorMapper;
+import br.com.luankenzley.hyperprof.core.Exceptions.ProfessorNotFoundException;
 import br.com.luankenzley.hyperprof.core.repositories.ProfessorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,12 @@ public class ProfessorServiceImpl implements ProfessorService{
                 .stream()
                 .map(professorMapper::toProfessorResponse)
                 .toList();
+    }
+
+    @Override
+    public ProfessorResponse buscarProfessorPorId(Long professorId) {
+        return professorRepository.findById(professorId)
+                .map(professorMapper::toProfessorResponse)
+                .orElseThrow(ProfessorNotFoundException::new);
     }
 }
