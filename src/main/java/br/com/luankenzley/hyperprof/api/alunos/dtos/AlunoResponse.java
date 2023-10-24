@@ -1,24 +1,25 @@
-package br.com.luankenzley.hyperprof.api.common.dtos;
+package br.com.luankenzley.hyperprof.api.alunos.dtos;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @Data
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ErrorResponse {
+public class AlunoResponse {
 
-    private int status;
-    private String message;
-    private String error;
-    private String cause;
-    private LocalDateTime timestamp;
+    private Long id;
+    private String nome;
+    private String email;
+    private LocalDateTime dataAula;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
