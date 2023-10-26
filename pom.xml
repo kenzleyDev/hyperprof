@@ -8,7 +8,7 @@
 		<version>3.0.0-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.treinaweb</groupId>
+	<groupId>br.com.luankenzley</groupId>
 	<artifactId>hyperprof</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hyperprof</name>
@@ -58,6 +58,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 	</dependencies>
 
