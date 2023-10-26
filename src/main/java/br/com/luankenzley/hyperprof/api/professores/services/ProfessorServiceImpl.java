@@ -1,5 +1,6 @@
 package br.com.luankenzley.hyperprof.api.professores.services;
 
+import br.com.luankenzley.hyperprof.api.professores.dtos.ProfessorRequest;
 import br.com.luankenzley.hyperprof.api.professores.dtos.ProfessorResponse;
 import br.com.luankenzley.hyperprof.api.professores.mappers.ProfessorMapper;
 import br.com.luankenzley.hyperprof.core.Exceptions.ProfessorNotFoundException;
@@ -29,5 +30,13 @@ public class ProfessorServiceImpl implements ProfessorService{
         return professorRepository.findById(professorId)
                 .map(professorMapper::toProfessorResponse)
                 .orElseThrow(ProfessorNotFoundException::new);
+    }
+
+    @Override
+    public ProfessorResponse cadastrarProfessor(ProfessorRequest professorRequest) {
+        var professorParaCadastrar = professorMapper.toProfessor(professorRequest);
+        var professorCadastrado = professorRepository.save(professorParaCadastrar);
+
+        return professorMapper.toProfessorResponse(professorCadastrado);
     }
 }

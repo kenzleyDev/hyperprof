@@ -1,13 +1,13 @@
 package br.com.luankenzley.hyperprof.api.professores.controllers;
 
 import br.com.luankenzley.hyperprof.api.common.routes.ApiRoutes;
+import br.com.luankenzley.hyperprof.api.professores.dtos.ProfessorRequest;
 import br.com.luankenzley.hyperprof.api.professores.dtos.ProfessorResponse;
 import br.com.luankenzley.hyperprof.api.professores.services.ProfessorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +27,11 @@ public class ProfessorRestController {
     @GetMapping(ApiRoutes.BUSCAR_PROFESSORES_POR_ID)
     public ProfessorResponse buscarProfessorPorId(@PathVariable Long professorId) {
         return professorService.buscarProfessorPorId(professorId);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(ApiRoutes.CADASTRAR_PROFESSOR)
+    public ProfessorResponse cadastrarProfessor(@RequestBody @Valid ProfessorRequest professorRequest) {
+        return professorService.cadastrarProfessor(professorRequest);
     }
 }
