@@ -1,4 +1,4 @@
-package br.com.luankenzley.hyperprof.core.services;
+package br.com.luankenzley.hyperprof.core.services.authentication;
 
 import br.com.luankenzley.hyperprof.core.models.AuthenticatedUser;
 import br.com.luankenzley.hyperprof.core.repositories.ProfessorRepository;

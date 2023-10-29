@@ -8,3 +8,16 @@ spring:
     properties:
       hibernate:
         "[format_sql]": true
+
+br:
+  com:
+    luankenzley:
+      hyperprof:
+        core:
+          services:
+            token:
+              jjwt:
+                accessTokenSigningKey: p8bo0yqR'+_BnJ_"Jx-HGs(b&HVIWK?cMhx,TN0J?z{>A][.zWx~Bk~ScP3+v#5
+                acessTokenExpirationInSeconds: 30
+                refreshTokenSigningKey: .LHeUBwGT-a8E%M.SOm(,z<*6DVWr<u+A178_1(tea##!*/v'bSR-{gEkWIr*wT
+                refreshTokenExpirationInSeconds: 60

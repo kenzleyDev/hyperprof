@@ -14,10 +14,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProfessorServiceImpl implements ProfessorService{
-
     private final ProfessorMapper professorMapper;
     private final ProfessorRepository professorRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     @Override
