@@ -1,5 +1,7 @@
 package br.com.luankenzley.hyperprof.core.services.token.providers.jjwt;
 
+import br.com.luankenzley.hyperprof.core.models.TokenInvalido;
+import br.com.luankenzley.hyperprof.core.repositories.TokenInvalidoRepository;
 import br.com.luankenzley.hyperprof.core.services.token.TokenService;
 import br.com.luankenzley.hyperprof.core.services.token.TokenServiceException;
 import io.jsonwebtoken.Claims;
@@ -12,12 +14,14 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
 public class JjwtTokenService implements TokenService {
 
     private final JjwtConfigProperties configProperties;
+    private final TokenInvalidoRepository tokenInvalidoRepository;
 
     @Override
     public String gerarAccessToken(String subject) {
@@ -48,6 +52,10 @@ public class JjwtTokenService implements TokenService {
 
     @Override
     public void invalidarTokens(String... tokens) {
+        var tokensInvalidos = Stream.of(tokens)
+                .map(token -> TokenInvalido.builder().token(token).build())
+                .toList();
+        tokenInvalidoRepository.saveAll(tokensInvalidos);
 
     }
 
@@ -73,7 +81,11 @@ public class JjwtTokenService implements TokenService {
         }
     }
 
-    private static Claims tryGetClaims(String token, String signinKey) {
+    private Claims tryGetClaims(String token, String signinKey) {
+
+        if(tokenInvalidoRepository.existsByToken(token)) {
+            throw new TokenServiceException("Token inválido");
+        }
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(signinKey.getBytes()))
                 .build()
