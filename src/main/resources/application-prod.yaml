@@ -9,3 +9,16 @@ spring:
     show-sql: false
     properties:
       "[format_sql]": false
+
+br:
+  com:
+    luankenzley:
+      hyperprof:
+        core:
+          services:
+            token:
+              jjwt:
+                accessTokenSigningKey: ${HYPERPROF_JJWT_ACCESS_TOKEN_SIGING_KEY}
+                acessTokenExpirationInSeconds: ${HYPERPROF_JJWT_ACCESS_TOKEN_EXPIRATION_IN_SECONDS}
+                refreshTokenSigningKey: ${HYPERPROF_JJWT_REFRESH_TOKEN_SIGING_KEY}
+                refreshTokenExpirationInSeconds: ${HYPERPROF_JJWT_REFRESH_TOKEN_EXPIRATION_IN_SECONDS}
