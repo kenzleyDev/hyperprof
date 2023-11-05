@@ -40,4 +40,11 @@ public class ProfessorRestController {
     public ProfessorResponse atualizarProfessorLogado(@RequestBody @Valid ProfessorRequest professorRequest) {
         return professorService.atualizarProfessorLogado(professorRequest);
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(ApiRoutes.EXCLUIR_PROFESSOR_LOGADO)
+    public void excluirProfessorLogado() {
+        professorService.excluirProfessorLogado();
+    }
 }

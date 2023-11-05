@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -42,5 +43,8 @@ public class Professor extends Auditable{
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE)
+    private List<Aluno> alunos;
 
 }

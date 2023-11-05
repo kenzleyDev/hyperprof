@@ -54,4 +54,11 @@ public class ProfessorServiceImpl implements ProfessorService{
         var professorAtualiado = professorRepository.save(professor);
         return professorMapper.toProfessorResponse(professorAtualiado);
     }
+
+    @Override
+    public void excluirProfessorLogado() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var professor = ((AuthenticatedUser) authentication.getPrincipal()).getProfessor();
+        professorRepository.delete(professor);
+    }
 }
