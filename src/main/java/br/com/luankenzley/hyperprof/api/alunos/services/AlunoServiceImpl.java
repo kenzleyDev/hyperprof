@@ -4,10 +4,14 @@ import br.com.luankenzley.hyperprof.api.alunos.dtos.AlunoRequest;
 import br.com.luankenzley.hyperprof.api.alunos.dtos.AlunoResponse;
 import br.com.luankenzley.hyperprof.api.alunos.mappers.AlunoMapper;
 import br.com.luankenzley.hyperprof.core.Exceptions.ProfessorNotFoundException;
+import br.com.luankenzley.hyperprof.core.models.AuthenticatedUser;
 import br.com.luankenzley.hyperprof.core.repositories.AlunoRepository;
 import br.com.luankenzley.hyperprof.core.repositories.ProfessorRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,4 +33,15 @@ public class AlunoServiceImpl implements AlunoService{
 
         return alunoMapper.toAlunoResponse(alunoCadastrado);
     }
+
+    @Override
+    public List<AlunoResponse> listarAlunosPorProfessorLogado() {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var professor = ((AuthenticatedUser) authentication.getPrincipal()).getProfessor();
+        return alunoRepository.findByProfessor(professor)
+                .stream()
+                .map(alunoMapper::toAlunoResponse)
+                .toList();
+    }
+
 }

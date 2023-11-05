@@ -7,6 +7,7 @@ import br.com.luankenzley.hyperprof.api.professores.services.ProfessorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,10 @@ public class ProfessorRestController {
     @PostMapping(ApiRoutes.CADASTRAR_PROFESSOR)
     public ProfessorResponse cadastrarProfessor(@RequestBody @Valid ProfessorRequest professorRequest) {
         return professorService.cadastrarProfessor(professorRequest);
+    }
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping(ApiRoutes.ATUALIZAR_PROFESSOR_LOGADO)
+    public ProfessorResponse atualizarProfessorLogado(@RequestBody @Valid ProfessorRequest professorRequest) {
+        return professorService.atualizarProfessorLogado(professorRequest);
     }
 }

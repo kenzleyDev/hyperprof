@@ -7,7 +7,10 @@ import br.com.luankenzley.hyperprof.api.common.routes.ApiRoutes;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +25,11 @@ public class AlunoRestController {
             @PathVariable Long professorId
     ) {
         return alunoService.cadastrarAluno(alunoRequest, professorId);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(ApiRoutes.LISTAR_ALUNOS_POR_PROFESSOR_LOGADO)
+    public List<AlunoResponse> listarAlunosPorProfessorLogado() {
+        return alunoService.listarAlunosPorProfessorLogado();
     }
 }
